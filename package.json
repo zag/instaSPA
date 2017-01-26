@@ -1,0 +1,28 @@
+{
+  "name": "instaSPA",
+  "version": "1.0.0",
+  "description": "instaSPA",
+  "main": "index.js",
+  "scripts": {
+    "dev": "./node_modules/.bin/webpack-dev-server --progress --colors --hot --inline",
+    "build": "./node_modules/.bin/webpack -p"
+  },
+  "author": "Alex Zahatski",
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "^6.4.5",
+    "babel-loader": "^6.2.1",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "css-loader": "^0.23.1",
+    "events": "^1.1.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "object-assign": "^4.0.1",
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6",
+    "react-modal": "^0.6.1",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.11",
+    "webpack-dev-server": "^1.14.1"
+  }
+}

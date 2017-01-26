@@ -1,0 +1,64 @@
+body {
+    background: white;
+    font-size: xx-large;
+    transition: all 0.5s ease;
+    font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.4em;
+    text-align: center; 
+    min-width: 230px;
+    max-width: 90em;
+    margin: 0 auto;
+}
+
+table { 
+    width: 100%;
+    table-layout: fixed;
+    padding: 10px; 
+}
+
+td, th {
+    text-align:center; 
+    white-space: nowrap;
+}
+a:link, a:visited, body {  
+    color: black;  
+}
+.panels {
+    width:100%;
+}
+.panel { 
+    float:left;
+    width:33%;
+}
+.clear {
+    clear:both;
+}
+.stateLine {
+    margin: 0 0;
+    font-size: medium;
+}
+
+.stateLine span, a {
+    padding:10px;
+}
+
+h2,h3,h1 {
+    margin: 0;
+}
+
+li {
+list-style-type: none;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+}
+
+.item { margin-top:0.5em}
+
+
+.desc {
+    word-wrap: break-word;
+    display: block;
+    white-space: normal;
+}
