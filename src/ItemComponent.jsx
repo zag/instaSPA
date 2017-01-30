@@ -23,10 +23,11 @@ class ItemComponent extends React.Component {
   constructor(props) {
         super(props);
         this.state = {
-          EditIsOpen : false
+          EditIsOpen : false,
         };
         this.onSetDelete = this.onSetDelete.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        
   }
   onSubmit(e) {  
       if ( e ) {

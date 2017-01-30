@@ -3,7 +3,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import store from './ItemsStore.jsx'
 import PersonItem from './ItemComponent.jsx';
-
+const onPage = 10
 const customStyles = {
   overlay : {
     position          : 'fixed', 
@@ -27,24 +27,31 @@ class App extends React.Component {
     super();
     this.state = {
         'wait': store.getAll(),
-         newIsOpen : false
+         newIsOpen : false,
+         showPage: 0
     };
 
 
     this._onChange = this._onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
     this.onAddRecord = this.onAddRecord.bind(this);
+    this.setPage = this.setPage.bind(this)
+    
   } 
+  
+  setPage(n) {
+    this.setState( { 'showPage' : parseInt(n)})
+    console.log({'set Page': n})
+    // Store in cookies
+    document.cookie="PageN="+n+";";
+  }
 
   componentDidMount() {
     
-    var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)scrollY\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-    if (cookieValue) {
-      window.scroll(0,cookieValue)
+    var cookiePage = document.cookie.replace(/(?:(?:^|.*;\s*)PageN\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    if (cookiePage) {
+      this.setPage(cookiePage)
     }
-    window.onscroll = function(){
-       document.cookie="scrollY="+window.scrollY+";";
-    }
+    
     store.addChangeListener(this._onChange);
     window.addEventListener('storage', function(e){ store.onStorageChange(e)} );
 }
@@ -73,7 +80,8 @@ class App extends React.Component {
     
 
   render () {
-    let items = this.state.wait; 
+    let items = this.state.wait.slice(this.state.showPage * onPage, this.state.showPage * onPage + onPage); 
+    let totalPages =  Math.floor( this.state.wait.length / onPage )  + (this.state.wait.length % onPage ? 1 : 0)
     let PersonItems = [];
     items.forEach(function (item, index, array) {
               PersonItems.push( <PersonItem 
@@ -85,6 +93,21 @@ class App extends React.Component {
     }) 
     return <div className="panels">
     <h2>Persons list</h2>
+    <nav aria-label="Page navigation">
+  <ul className="pagination">
+    <li>
+      <a href="#" onClick={ (e)=>{ this.setPage(Math.max(0, this.state.showPage - 1 )) }} aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li><a href="#" >Page {this.state.showPage + 1 } of {totalPages }</a></li>
+    <li>
+      <a href="#" aria-label="Next" onClick={ (e)=>{ this.setPage(Math.min(totalPages, this.state.showPage + 1 )) }} >
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
     <table className="table table-striped table-hover"> 
       <thead>
        <tr>
